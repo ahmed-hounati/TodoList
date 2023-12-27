@@ -40,8 +40,7 @@
                 <!-- Project Cards -->
                 <div class="w-1/3 p-4">
                     <div class="bg-white rounded shadow-md">
-                        <div class="p-4 font-bold text-xl">Project Name 1</div>
-                        <!-- Additional project details can be added here -->
+                        <div class="p-4 font-bold text-xl"><?php foreach($users as $user) ?></div>
                     </div>
                 </div>
 
