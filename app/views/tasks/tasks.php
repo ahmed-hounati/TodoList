@@ -17,13 +17,13 @@
                 <div class="mb-6 text-2xl font-bold">DataWare</div>
                 <ul>
                     <li class="mb-4">
-                        <a href="dashboard.php" class="block">Dashboard</a>
+                        <a href="<?php echo URLROOT; ?>/projects" class="block">Projects</a>
                     </li>
                     <li class="mb-4">
-                        <a href="project.php" class="block">Projects</a>
+                        <a href="" class="block">Tasks</a>
                     </li>
-                    <li>
-                        <a href="team.php" class="block">Team</a>
+                    <li class="mb-4">
+                        <a href="<?php echo URLROOT; ?>/users/logout" class="block">logout</a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +48,6 @@
                                 <button class="px-4 py-2 bg-red-500 text-white rounded">Delete</button>
                             </div>
                         </li>
-                        <!-- More tasks here -->
                     </ul>
                 </div>
 

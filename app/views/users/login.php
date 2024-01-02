@@ -12,7 +12,7 @@
 
     <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 class="text-2xl font-semibold mb-4">Login</h1>
-        <form>
+        <form action="<?php echo URLROOT; ?>/users/login" method="post">
             <div class="mb-4">
                 <label for="email" class="block text-gray-600">Email:</label>
                 <input type="email" id="email" name="email" class="border rounded w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300 <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
@@ -24,8 +24,8 @@
                 <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
             </div>
             <div class="flex justify-between items-center mb-4">
-                <a href="<?php echo URLROOT; ?>/users/signup" class="text-blue-500">No account? Sign Up</a>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Sign Up</button>
+                <a href="<?php echo URLROOT; ?>/users/register" class="text-blue-500">No account? Register</a>
+                <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">login</button>
             </div>
         </form>
     </div>

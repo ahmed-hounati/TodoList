@@ -26,7 +26,7 @@ class Task
         else
             return false;
     }
-    public function getTaskInfo($id)
+    public function getTasks($id)
     {
         $this->db->query("SELECT * FROM tasks WHERE task_id = :id");
         $this->db->bind(':id', $id);

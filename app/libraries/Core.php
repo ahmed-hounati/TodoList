@@ -1,60 +1,57 @@
 <?php
-
-/******************************
- * url = controller/method/param[]
- * Core class
- * routing class
- *****************************/
-
+/*
+   * App Core Class
+   * Creates URL & loads core controller
+   * URL FORMAT - /controller/method/params
+   */
 class Core
 {
-
-    private $Controller = 'Pages';
-    private $method = 'index';
-    private $param = [];
+    protected $currentController = 'Pages';
+    protected $currentMethod = 'index';
+    protected $params = [];
 
     public function __construct()
     {
-        require_once '../app/Controllers.php';
-        require_once '../app/lDatabase.php';
 
         $url = $this->getUrl();
 
-        if (isset($url[0])) {
-            if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
-                $this->Controller = ucwords($url[0]);
-                unset($url[0]);
-            }
+        // Look in controllers for first value
+        if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
+            // If exists, set as controller
+            $this->currentController = ucwords($url[0]);
+            // Unset 0 Index
+            unset($url[0]);
         }
-        //require the controller
-        require_once '../app/controllers/' . $this->Controller . '.php';
 
-        //instantiation of controller
-        $this->Controller = new $this->Controller;
+        // Require the controller
+        require_once '../app/controllers/' . $this->currentController . '.php';
 
+        // Instantiate controller class
+        $this->currentController = new $this->currentController;
+
+        // Check for second part of url
         if (isset($url[1])) {
-            if (method_exists($this->Controller, $url[1])) {
-                $this->method = $url[1];
+            // Check to see if method exists in controller
+            if (method_exists($this->currentController, $url[1])) {
+                $this->currentMethod = $url[1];
+                // Unset 1 index
                 unset($url[1]);
             }
         }
 
-        $this->param = $url ? array_values($url) : [];
-        //call the function
-        call_user_func_array([$this->Controller, $this->method], $this->param);
+        // Get params
+        $this->params = $url ? array_values($url) : [];
+
+        // Call a callback with array of params
+        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 
     public function getUrl()
     {
-
         if (isset($_GET['url'])) {
-
-            $url = $_GET['url'];
+            $url = rtrim($_GET['url'], '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
-            $url = rtrim($url, '/');
             $url = explode('/', $url);
-
-
             return $url;
         }
     }
